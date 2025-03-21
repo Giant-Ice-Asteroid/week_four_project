@@ -1,4 +1,5 @@
-from db import DatabaseConnection
+from db_connection import DatabaseConnection
+
 import mysql.connector # mySQL driver which allows python to communitcate with mySQL databases
 from dotenv import load_dotenv # loads environment variables from .env
 import os # allows interaction with the os, including reading environment variables
@@ -74,8 +75,7 @@ class CRUDOps:
         """
         
         cursor.execute(insert_query, values)
-        self.connection.commit()
-        print(f"Success! Data has been inserted into {table_name}")
+        self.connection.commit()      
 
 
     def read_data(self, table_name, columns="*", condition=None):
@@ -123,7 +123,7 @@ class CRUDOps:
 
     def delete_data(self, table_name, condition):
         """
-        caution - method which deletes data from a table 
+        caution - method which deletes specified data points from a table 
         the condition parameter specifies what is to be deleted
 
         """
@@ -141,6 +141,19 @@ class CRUDOps:
         self.connection.commit()
         
         print(f"All gone... Data deleted successfully from {table_name}")
+
+    def execute_query(self, query):
+        """
+        While not "crud" as such, this general tool allows the execution of a raw sql query
+        used in load_data.py to drop(delete) existing tables through the DROP TABLE query
+        different than delete_data, as it drops the entire table(s) easily and creates a clean slate
+        """
+        if self.connection is None:
+            self.connect()
+        
+        cursor = self.connection.cursor()
+        cursor.execute(query)
+        self.connection.commit()
 
     def close_connection(self):
         """
