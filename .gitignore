@@ -14,7 +14,7 @@ __pycache__/
 *.py[cod]
 # Cache files which are automatically created compiled code for the sake of speeding up processes - specific to my system and uneccesary 
 
-# VSCode
+# VSCode files
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json

@@ -1,7 +1,3 @@
-"""
-Database connection class lives here.
-
-"""
 
 import mysql.connector # mySQL driver which allows python to communitcate with mySQL databases
 from dotenv import load_dotenv # loads environment variables from .env
@@ -39,7 +35,7 @@ class DatabaseConnection:
         user=self.user,
         password=self.password
     )
-        print("Connected to MySQL server successfully..!")
+        
         return self.connection
 
     def create_database(self):
